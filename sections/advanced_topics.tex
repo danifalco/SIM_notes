@@ -1,0 +1,115 @@
+\section{Advanced Topics}
+
+This section covers some of the more complex statistical concepts and methods that go beyond basic hypothesis testing and regression. Understanding these topics is essential for tackling more sophisticated analytical problems and gaining deeper insights from data.
+
+\subsection{Central Limit Theorem (CLT)}
+The Central Limit Theorem is a fundamental concept in statistics that states that the distribution of the sample mean will approximate a normal distribution, regardless of the original distribution of the population, as the sample size becomes large.
+
+\textbf{Mathematical Statement}:
+
+If \(X_1, X_2, \ldots, X_n\) are independent and identically distributed random variables with mean \(\mu\) and variance \(\sigma^2\), the sample mean \(\bar{X}\) is approximately normally distributed:
+
+\[
+\bar{X} \sim N\left(\mu, \frac{\sigma^2}{n}\right)
+\]
+
+\textbf{Key Points}:
+\begin{itemize}
+    \item The larger the sample size, the better the approximation to the normal distribution.
+    \item This property justifies the use of normal-based methods (e.g., t-tests) even when the underlying data is not normally distributed.
+\end{itemize}
+
+\subsection{Law of Large Numbers (LLN)}
+The Law of Large Numbers states that as the sample size increases, the sample mean \(\bar{X}\) converges to the true population mean \(\mu\).
+
+\textbf{Types of LLN}:
+\begin{itemize}
+    \item \textbf{Weak Law}: The sample mean converges in probability to the population mean.
+    \item \textbf{Strong Law}: The sample mean converges almost surely to the population mean.
+\end{itemize}
+
+\textbf{Implications}:
+\begin{itemize}
+    \item Ensures that larger samples provide more reliable estimates of population parameters.
+    \item The variability of the sample mean decreases as the sample size increases.
+\end{itemize}
+
+\subsection{Non-Parametric Tests}
+Non-parametric tests do not assume a specific distribution for the data, making them useful for small samples or data that do not meet parametric assumptions.
+
+\begin{itemize}
+    \item \textbf{Mann-Whitney U Test}:
+    \begin{itemize}
+        \item Compares the ranks of two independent samples.
+        \item Analogous to the two-sample t-test but does not require normality.
+        \item \textbf{R Function}: \texttt{wilcox.test()}.
+    \end{itemize}
+    \item \textbf{Kruskal-Wallis Test}:
+    \begin{itemize}
+        \item Extends the Mann-Whitney U test to compare more than two groups.
+        \item Equivalent to one-way ANOVA for ranked data.
+        \item \textbf{R Function}: \texttt{kruskal.test()}.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Bootstrap Methods}
+Bootstrap methods involve resampling with replacement from a dataset to estimate the distribution of a statistic. They are useful for constructing confidence intervals and assessing the stability of estimates without relying on parametric assumptions.
+
+\textbf{Procedure}:
+\begin{enumerate}
+    \item Draw \(B\) bootstrap samples from the original dataset.
+    \item Calculate the statistic of interest (e.g., mean, median) for each bootstrap sample.
+    \item Use the distribution of these \(B\) statistics to estimate confidence intervals or other properties.
+\end{enumerate}
+
+\textbf{Example R Code for Bootstrapping}:
+
+\begin{lstlisting}[language=R, caption=Bootstrap Example in R]
+# Load the boot library
+library(boot)
+
+# Create a function for the statistic of interest
+mean_stat <- function(data, indices) {
+  return(mean(data[indices]))
+}
+
+# Sample data
+data <- c(12.9, 14.2, 13.7, 15.3, 14.8, 13.6, 14.0)
+
+# Perform bootstrapping
+bootstrap_results <- boot(data, statistic = mean_stat, R = 1000)
+
+# Bootstrap confidence interval
+boot.ci(bootstrap_results, type = "bca")
+\end{lstlisting}
+
+\textbf{When to Use Bootstrapping}:
+\begin{itemize}
+    \item When sample sizes are small and standard parametric assumptions are not valid.
+    \item When you need robust estimates of standard errors and confidence intervals.
+\end{itemize}
+
+\subsection{Choosing Between Advanced Techniques}
+
+\begin{tabularx}{\textwidth}{|l|X|X|X|}
+\hline
+\textbf{Technique} & \textbf{Data Type} & \textbf{Purpose} & \textbf{R Function} \\
+\hline
+Central Limit Theorem & Continuous/Discrete & Justifies normal approximation & Manual calculations \\
+\hline
+Law of Large Numbers & Continuous/Discrete & Ensures convergence of sample mean & Manual calculations \\
+\hline
+Mann-Whitney U Test & Non-normal, Ranked Data & Compares two independent groups & \texttt{wilcox.test()} \\
+\hline
+Kruskal-Wallis Test & Non-normal, Ranked Data & Compares more than two groups & \texttt{kruskal.test()} \\
+\hline
+Bootstrap & Any & Estimate confidence intervals & \texttt{boot()} \\
+\hline
+\end{tabularx}
+
+\subsection{Key Points}
+\begin{itemize}
+    \item Advanced techniques are necessary for handling non-standard data and assessing the robustness of models.
+    \item Non-parametric tests are useful when the assumptions of parametric tests are violated.
+    \item Bootstrap methods provide flexible, assumption-free approaches for estimating confidence intervals.
+\end{itemize}

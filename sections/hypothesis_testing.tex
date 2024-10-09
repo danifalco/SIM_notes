@@ -1,0 +1,105 @@
+\section{Hypothesis Testing}
+
+Hypothesis testing is a statistical method used to make decisions or draw conclusions about a population based on sample data. It involves formulating two competing hypotheses and using sample data to determine which hypothesis is more plausible.
+
+\subsection{Key Concepts in Hypothesis Testing}
+\begin{itemize}
+    \item \textbf{Null Hypothesis (\(H_0\))}: The hypothesis that there is no effect or no difference. This is the hypothesis that we aim to test against.
+    \item \textbf{Alternative Hypothesis (\(H_1\))}: The hypothesis that there is a significant effect or difference.
+    \item \textbf{Significance Level (\(\alpha\))}: The probability of rejecting the null hypothesis when it is actually true. Common values are 0.05, 0.01, or 0.1.
+    \item \textbf{p-value}: The probability of obtaining results as extreme as those observed, assuming \(H_0\) is true. A small p-value (less than \(\alpha\)) indicates strong evidence against \(H_0\).
+    \item \textbf{Type I Error}: Incorrectly rejecting \(H_0\) when it is true (false positive).
+    \item \textbf{Type II Error}: Failing to reject \(H_0\) when \(H_1\) is true (false negative).
+\end{itemize}
+
+\subsection{Types of Hypothesis Tests}
+\textbf{The choice of test depends on the nature of the data and the research question.} Some common hypothesis tests include:
+
+\begin{itemize}
+    \item \textbf{t-tests} --- Used to compare means.
+        \begin{itemize}
+            \item \textbf{One-sample t-test}: Compares the mean of a single group to a known value.
+            \item \textbf{Two-sample t-test}: Compares means between two independent groups.
+            \item \textbf{Paired t-test}: Compares means from the same group at different times.
+        \end{itemize}
+    \item \textbf{ANOVA (Analysis of Variance)} --- Compares means among three or more groups.
+    \item \textbf{Chi-squared Test} --- Assesses relationships between categorical variables.
+    \item \textbf{Fisher’s Exact Test} --- An alternative to Chi-squared when sample sizes are small.
+\end{itemize}
+
+\subsection{Useful R Functions for Hypothesis Testing}
+\begin{itemize}
+    \item \texttt{t.test()} --- Performs one and two-sample t-tests, as well as paired t-tests.
+    \item \texttt{aov()} --- Fits an ANOVA model.
+    \item \texttt{chisq.test()} --- Performs the Chi-squared test for independence.
+    \item \texttt{fisher.test()} --- Conducts Fisher’s Exact Test for count data.
+    \item \texttt{wilcox.test()} --- Performs non-parametric tests (e.g., Mann-Whitney U test).
+\end{itemize}
+
+\subsection{Example R Code for Hypothesis Testing}
+The following example shows how to perform various hypothesis tests in R:
+
+\begin{lstlisting}[language=R, caption=Hypothesis Testing in R]
+# Load necessary data
+data(mtcars)
+
+# One-sample t-test
+t.test(mtcars$mpg, mu = 20) # Test if mean mpg is different from 20
+
+# Two-sample t-test
+t.test(mpg ~ cyl, data = mtcars) # Test if mean mpg differs by number of cylinders
+
+# Paired t-test
+pre_weight <- c(70, 75, 80, 78, 72)
+post_weight <- c(68, 74, 79, 76, 71)
+t.test(pre_weight, post_weight, paired = TRUE) # Compare pre and post weights
+
+# Chi-squared Test for independence
+table_data <- table(mtcars$cyl, mtcars$gear)
+chisq.test(table_data)
+
+# ANOVA
+fit <- aov(mpg ~ factor(cyl), data = mtcars) # Test if mpg differs across cylinders
+summary(fit)
+\end{lstlisting}
+
+\subsection{General Procedure for Hypothesis Testing}
+The standard approach for hypothesis testing involves the following steps:
+
+\begin{enumerate}
+    \item \textbf{State the Hypotheses}:
+    \begin{itemize}
+        \item Null hypothesis (\(H_0\)): Example: There is no difference in mean mileage between 4-cylinder and 6-cylinder cars.
+        \item Alternative hypothesis (\(H_1\)): Example: The mean mileage is different between the two groups.
+    \end{itemize}
+
+    \item \textbf{Set the Significance Level} (\(\alpha\)): Common choices are 0.05 or 0.01.
+
+    \item \textbf{Calculate the Test Statistic}: Use the appropriate formula depending on the test being conducted.
+
+    \item \textbf{Find the p-value and Make a Decision}:
+    \begin{itemize}
+        \item If \( p \leq \alpha \): Reject \(H_0\), and conclude that there is sufficient evidence to support \(H_1\).
+        \item If \( p > \alpha \): Fail to reject \(H_0\), and conclude that there is not enough evidence to support \(H_1\).
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Choosing the Appropriate Hypothesis Test}
+
+\begin{tabularx}{\textwidth}{|p{9cm}|X|X|}
+\hline
+\textbf{Scenario} & \textbf{Test to Use} & \textbf{R Function} \\
+\hline
+Comparing the mean of a sample to a known value & One-sample t-test & \texttt{t.test(x, mu = value)} \\
+\hline
+Comparing means between two independent groups & Two-sample t-test & \texttt{t.test(x ~ group)} \\
+\hline
+Comparing means within the same group at different times & Paired t-test & \texttt{t.test(pre, post, paired = TRUE)} \\
+\hline
+Testing for relationship between categorical variables & Chi-squared Test & \texttt{chisq.test(table)} \\
+\hline
+Comparing means across multiple groups & ANOVA & \texttt{aov()} \\
+\hline
+\end{tabularx}
+
+

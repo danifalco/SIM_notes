@@ -1,0 +1,117 @@
+\section{Distributions}
+
+Understanding different probability distributions is crucial in statistical modelling and inference. Each distribution has unique properties and applications, and choosing the correct one for your data is essential.
+
+\subsection{Key Distributions and Their Properties}
+
+\begin{itemize}
+    \item \textbf{Normal Distribution}:
+    \begin{itemize}
+        \item Symmetrical, bell-shaped distribution defined by its mean \(\mu\) and variance \(\sigma^2\).
+        \item Widely used in inferential statistics due to the Central Limit Theorem.
+        \item \textbf{R Functions}: \texttt{dnorm()}, \texttt{pnorm()}, \texttt{rnorm()}.
+    \end{itemize}
+    \item \textbf{Binomial Distribution}:
+    \begin{itemize}
+        \item Models the number of successes in a fixed number of independent Bernoulli trials.
+        \item Defined by parameters \(n\) (number of trials) and \(p\) (probability of success).
+        \item \textbf{R Functions}: \texttt{dbinom()}, \texttt{pbinom()}, \texttt{rbinom()}.
+    \end{itemize}
+    \item \textbf{Poisson Distribution}:
+    \begin{itemize}
+        \item Models the count of events occurring in a fixed interval of time or space.
+        \item Parameterized by \(\lambda\) (rate of occurrence).
+        \item \textbf{R Functions}: \texttt{dpois()}, \texttt{ppois()}, \texttt{rpois()}.
+    \end{itemize}
+    \item \textbf{Exponential Distribution}:
+    \begin{itemize}
+        \item Models the time between successive events in a Poisson process.
+        \item Defined by the rate parameter \(\lambda\).
+        \item \textbf{R Functions}: \texttt{dexp()}, \texttt{pexp()}, \texttt{rexp()}.
+    \end{itemize}
+    \item \textbf{Chi-squared Distribution}:
+    \begin{itemize}
+        \item Distribution of the sum of squared standard normal variables.
+        \item Commonly used in hypothesis testing and constructing confidence intervals.
+        \item \textbf{R Functions}: \texttt{dchisq()}, \texttt{pchisq()}, \texttt{rchisq()}.
+    \end{itemize}
+    \item \textbf{Student’s t Distribution}:
+    \begin{itemize}
+        \item Similar to the normal distribution but with heavier tails.
+        \item Useful for small sample sizes or when population variance is unknown.
+        \item \textbf{R Functions}: \texttt{dt()}, \texttt{pt()}, \texttt{rt()}.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Choosing the Right Distribution}
+The choice of distribution depends on the type of data and the problem context. Consider the following guidelines:
+
+\begin{itemize}
+    \item \textbf{Continuous Data}: Use the normal distribution if the data is symmetrically distributed. Use the exponential distribution for time-to-event data.
+    \item \textbf{Discrete Data}: Use the binomial distribution for binary outcomes and the Poisson distribution for count data.
+    \item \textbf{Small Sample Size}: Use the t-distribution if the sample size is small and the variance is unknown.
+\end{itemize}
+
+\subsection{Useful R Functions for Distributions}
+\begin{itemize}
+    \item \texttt{dnorm(), dpois(), dbinom()} --- Probability density functions.
+    \item \texttt{pnorm(), ppois(), pbinom()} --- Cumulative distribution functions.
+    \item \texttt{rnorm(), rpois(), rbinom()} --- Random number generation.
+    \item \texttt{qnorm(), qpois(), qbinom()} --- Quantile functions.
+\end{itemize}
+
+\subsection{Example R Code for Distributions}
+Here’s how to generate and visualize different distributions in R:
+
+\begin{lstlisting}[language=R, caption=R Code for Generating and Visualizing Distributions]
+# Set up parameters
+mu <- 0
+sigma <- 1
+lambda <- 2
+n <- 10
+p <- 0.3
+
+# Generate and visualize a normal distribution
+x <- seq(-3, 3, by = 0.1)
+y <- dnorm(x, mean = mu, sd = sigma)
+plot(x, y, type = "l", main = "Normal Distribution", xlab = "X", ylab = "Density")
+
+# Generate and plot a binomial distribution
+binom_data <- dbinom(0:n, size = n, prob = p)
+barplot(binom_data, main = "Binomial Distribution (n=10, p=0.3)", xlab = "Number of Successes")
+
+# Generate and plot a Poisson distribution
+pois_data <- dpois(0:20, lambda = lambda)
+barplot(pois_data, main = "Poisson Distribution (lambda=2)", xlab = "Number of Events")
+
+# Generate and plot an exponential distribution
+exp_data <- rexp(1000, rate = lambda)
+hist(exp_data, main = "Exponential Distribution (rate=2)", xlab = "Time", breaks = 20)
+\end{lstlisting}
+
+\subsection{When to Use Each Distribution}
+
+\begin{tabularx}{\textwidth}{|l|X|X|X|}
+\hline
+\textbf{Distribution} & \textbf{Type of Data} & \textbf{Common Usage} & \textbf{R Function} \\
+\hline
+Normal & Continuous & Modeling measurement errors, heights, weights & \texttt{rnorm(), dnorm()} \\
+\hline
+Binomial & Discrete & Modeling binary outcomes (e.g., coin flips) & \texttt{rbinom(), dbinom()} \\
+\hline
+Poisson & Discrete & Modeling count data (e.g., number of calls per hour) & \texttt{rpois(), dpois()} \\
+\hline
+Exponential & Continuous & Modeling time to next event (e.g., failure times) & \texttt{rexp(), dexp()} \\
+\hline
+Chi-squared & Continuous & Goodness-of-fit tests & \texttt{rchisq(), dchisq()} \\
+\hline
+Student's t & Continuous & Small sample data, unknown variance & \texttt{rt(), dt()} \\
+\hline
+\end{tabularx}
+
+\subsection{Key Points}
+\begin{itemize}
+    \item Understanding the properties of each distribution is essential for selecting the appropriate model.
+    \item Use visualizations (e.g., histograms, density plots) to assess whether your data fits a particular distribution.
+    \item Some statistical tests rely on specific distributions; always verify assumptions before proceeding.
+\end{itemize}

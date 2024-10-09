@@ -1,0 +1,131 @@
+\section{Regression and Modelling}
+
+Regression analysis is a powerful statistical tool used to understand the relationship between one or more independent variables and a dependent variable. It is widely used for prediction, inference, and uncovering causal relationships.
+
+\subsection{Linear Regression}
+Linear regression models the relationship between a dependent variable \(y\) and one or more independent variables \(x_1, x_2, \ldots, x_n\) using a linear function.
+
+\textbf{Simple Linear Regression Model}:
+
+\[
+y = \beta_0 + \beta_1 x + \epsilon
+\]
+
+Where:
+\begin{itemize}
+    \item \(\beta_0\) --- Intercept (the value of \(y\) when \(x = 0\)).
+    \item \(\beta_1\) --- Slope (change in \(y\) for a one-unit change in \(x\)).
+    \item \(\epsilon\) --- Random error term, assumed to be normally distributed with mean 0.
+\end{itemize}
+
+\subsubsection{Multiple Linear Regression}
+Multiple linear regression models the relationship between a dependent variable and multiple independent variables:
+
+\[
+y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_n x_n + \epsilon
+\]
+
+Where \(\beta_1, \beta_2, \ldots, \beta_n\) are the coefficients for each independent variable.
+
+\subsubsection{Assumptions of Linear Regression}
+\begin{itemize}
+    \item \textbf{Linearity}: The relationship between the independent and dependent variables is linear.
+    \item \textbf{Independence}: Observations are independent.
+    \item \textbf{Homoscedasticity}: Constant variance of the error terms across all levels of independent variables.
+    \item \textbf{Normality}: The residuals (errors) follow a normal distribution.
+\end{itemize}
+
+\subsection{Logistic Regression}
+Logistic regression is used when the dependent variable is categorical, often binary (e.g., success/failure). Instead of modelling the dependent variable directly, logistic regression models the log odds of the probability of an event occurring:
+
+\[
+\log \left( \frac{p}{1-p} \right) = \beta_0 + \beta_1 x_1 + \cdots + \beta_n x_n
+\]
+
+Where:
+\begin{itemize}
+    \item \(p\) --- Probability of success (e.g., \(p(\text{event} = 1)\)).
+    \item \(\beta_0, \beta_1, \ldots, \beta_n\) --- Coefficients estimated using maximum likelihood.
+\end{itemize}
+
+\subsection{Model Evaluation Metrics}
+Once a model is fitted, it is essential to evaluate its performance using appropriate metrics:
+
+\begin{itemize}
+    \item \textbf{R-squared} --- Proportion of variance explained by the model. Higher values indicate better fit.
+    \item \textbf{Adjusted R-squared} --- Adjusted version of R-squared that penalises adding irrelevant predictors.
+    \item \textbf{Mean Squared Error (MSE)} --- Average of the squared differences between observed and predicted values.
+    \item \textbf{Akaike Information Criterion (AIC)} --- Measures the goodness of fit while penalising for the number of predictors.
+\end{itemize}
+
+\subsection{Useful R Functions for Regression and Modelling}
+\begin{itemize}
+    \item \texttt{lm()} --- Fits a linear regression model.
+    \item \texttt{summary()} --- Summarises the results of a linear or logistic model.
+    \item \texttt{glm()} --- Fits a generalised linear model, including logistic regression.
+    \item \texttt{predict()} --- Makes predictions using a fitted model.
+    \item \texttt{anova()} --- Compares models using ANOVA.
+\end{itemize}
+
+\subsection{Example R Code for Regression Analysis}
+Here is an example of fitting linear and logistic regression models in R:
+
+\begin{lstlisting}[language=R, caption=Regression Analysis in R]
+# Load the dataset
+data(mtcars)
+
+# Linear Regression: Predicting MPG from Horsepower and Weight
+linear_model <- lm(mpg ~ hp + wt, data = mtcars)
+summary(linear_model)
+
+# Visualising the fit
+plot(mtcars$hp, mtcars$mpg, main = "MPG vs Horsepower", xlab = "Horsepower", ylab = "MPG")
+abline(linear_model, col = "red")
+
+# Logistic Regression: Predicting Automatic vs Manual Transmission
+mtcars$am <- factor(mtcars$am, labels = c("Automatic", "Manual"))
+logistic_model <- glm(am ~ hp + wt, data = mtcars, family = "binomial")
+summary(logistic_model)
+
+# Predict probabilities
+predict(logistic_model, type = "response")
+\end{lstlisting}
+
+\subsection{Choosing Between Models}
+When building regression models, consider the following:
+
+\begin{itemize}
+    \item \textbf{Linear vs Logistic Regression}:
+    \begin{itemize}
+        \item Use linear regression when the dependent variable is continuous.
+        \item Use logistic regression for binary outcomes.
+    \end{itemize}
+    \item \textbf{Regularisation (Ridge/Lasso)}:
+    \begin{itemize}
+        \item Use regularisation techniques when dealing with high-dimensional data to prevent overfitting.
+        \item \textbf{R Function}: \texttt{glmnet()} for regularised models.
+    \end{itemize}
+\end{itemize}
+
+\subsection{When to Use Different Regression Models}
+
+\begin{tabularx}{\textwidth}{|l|X|X|X|}
+\hline
+\textbf{Model Type} & \textbf{Dependent Variable Type} & \textbf{Purpose} & \textbf{R Function} \\
+\hline
+Linear Regression & Continuous & Predict a continuous outcome & \texttt{lm()} \\
+\hline
+Logistic Regression & Binary/Categorical & Classify into two categories & \texttt{glm(family = "binomial")} \\
+\hline
+Ridge/Lasso Regression & Continuous & Prevent overfitting in high-dimensional data & \texttt{glmnet()} \\
+\hline
+Poisson Regression & Count Data & Model count outcomes (e.g., number of events) & \texttt{glm(family = "poisson")} \\
+\hline
+\end{tabularx}
+
+\subsection{Key Points}
+\begin{itemize}
+    \item Always check the assumptions of your regression model (e.g., linearity, homoscedasticity).
+    \item Evaluate model performance using appropriate metrics (e.g., R-squared, AIC).
+    \item Visualise residuals to check for patterns and validate model assumptions.
+\end{itemize}

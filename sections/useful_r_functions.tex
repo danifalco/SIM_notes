@@ -1,0 +1,100 @@
+\section{Useful R Functions and Syntax}
+
+R is a powerful language for data analysis and statistical modeling, providing a vast collection of functions for handling, visualising, and modelling data. This section summarises some of the most commonly used R functions to help streamline data analysis.
+
+\subsection{Data Handling and Manipulation}
+
+\begin{itemize}
+    \item \texttt{read.csv("file.csv")} --- Reads a CSV file into a dataframe.
+    \item \texttt{head(df, n)} --- Displays the first \( n \) rows of the dataframe.
+    \item \texttt{subset(df, condition)} --- Extracts rows from a dataframe based on a condition.
+    \item \texttt{merge(df1, df2, by = "column")} --- Merges two dataframes based on a common column.
+    \item \texttt{dplyr} Package Functions:
+    \begin{itemize}
+        \item \texttt{filter(df, condition)} --- Selects rows that meet a condition.
+        \item \texttt{select(df, columns)} --- Selects specific columns.
+        \item \texttt{mutate(df, new\_var = expression)} --- Creates new variables.
+        \item \texttt{group\_by(df, column)} --- Groups data by a specified column.
+        \item \texttt{summarise(df, new\_var = summary\_function)} --- Aggregates grouped data.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Basic Plotting Functions}
+
+\begin{itemize}
+    \item \texttt{plot(x, y)} --- Generic plotting function for scatter plots, line plots, etc.
+    \item \texttt{boxplot(x)} --- Creates a box-and-whisker plot for visualising the distribution.
+    \item \texttt{hist(x)} --- Creates a histogram of a vector \( x \).
+    \item \texttt{barplot(height)} --- Plots a bar chart with the specified heights.
+    \item \texttt{pairs(df)} --- Creates a matrix of scatterplots for pairwise comparison of variables.
+\end{itemize}
+
+\subsection{Advanced Visualisation with \texttt{ggplot2}}
+
+\texttt{ggplot2} is a versatile package for creating complex and aesthetically pleasing graphics. It uses a grammar of graphics approach to layer different elements.
+
+\begin{itemize}
+    \item \texttt{ggplot(data, aes(x, y))} --- Initialises a ggplot object with data and aesthetic mappings.
+    \item \texttt{geom\_point()} --- Adds points (scatter plot).
+    \item \texttt{geom\_boxplot()} --- Adds a box plot.
+    \item \texttt{geom\_histogram(binwidth = value)} --- Creates a histogram.
+    \item \texttt{facet\_wrap( \textasciitilde{} factor)} --- Creates a series of plots for each level of a factor.
+    \item \texttt{theme\_minimal()} --- Applies a minimal theme to the plot.
+\end{itemize}
+
+\subsection{Statistical Modelling Functions}
+
+\begin{itemize}
+    \item \texttt{lm(formula, data)} --- Fits a linear regression model.
+    \item \texttt{glm(formula, family = "binomial")} --- Fits a logistic regression model.
+    \item \texttt{anova(model1, model2)} --- Compares two nested models using ANOVA.
+    \item \texttt{predict(model, newdata)} --- Generates predictions based on a fitted model.
+    \item \texttt{summary(model)} --- Summarises the results of a model fit.
+\end{itemize}
+
+\subsection{Cheat Sheet Table: Common R Functions}
+
+\begin{tabularx}{\textwidth}{|l|X|X|}
+\hline
+\textbf{Category} & \textbf{Function} & \textbf{Description} \\
+\hline
+\textbf{Data Import} & \texttt{read.csv("file.csv")} & Reads a CSV file into R. \\
+\hline
+\textbf{Data Inspection} & \texttt{head(df)} & Displays the first few rows of a dataframe. \\
+\hline
+\textbf{Subsetting} & \texttt{subset(df, condition)} & Extracts rows based on a condition. \\
+\hline
+\textbf{Merging} & \texttt{merge(df1, df2, by = "col")} & Merges two dataframes by a common column. \\
+\hline
+\textbf{Summarising} & \texttt{summarise(df, new\_var = mean(col))} & Computes summary statistics. \\
+\hline
+\textbf{Basic Plots} & \texttt{plot(x, y)} & Creates scatter or line plots. \\
+\hline
+\textbf{Histograms} & \texttt{hist(x)} & Plots a histogram of the variable \( x \). \\
+\hline
+\textbf{Box Plots} & \texttt{boxplot(x)} & Creates a box plot to show data spread. \\
+\hline
+\textbf{ggplot2} & \texttt{ggplot(df, aes(x, y))} & Initialises a ggplot object. \\
+\hline
+\textbf{Linear Modelling} & \texttt{lm(mpg \textasciitilde{} hp, data)} & Fits a linear regression model. \\
+\hline
+\textbf{Logistic Modelling} & \texttt{glm(am \textasciitilde{} hp, data, family = "binomial")} & Fits a logistic regression model. \\
+\hline
+\end{tabularx}
+
+\subsection{R Markdown for Reproducible Reports}
+R Markdown allows you to create dynamic documents that include code, text, and visualisations. Use the following basic syntax:
+
+\begin{itemize}
+    \item Code chunks: \texttt{```\{r\}} ... \texttt{```}
+    \item Inline R code: \texttt{\textasciigrave{}r variable\textasciigrave{}}.
+    \item Text formatting: \texttt{**bold**}, \texttt{*italics*}, \texttt{\# Heading}.
+    \item Export formats: PDF, HTML, Word.
+\end{itemize}
+
+\subsection{Additional Resources and Tips}
+\begin{itemize}
+    \item Use the \texttt{?function\_name} to access documentation for any R function.
+    \item Leverage the \texttt{tidyverse} packages for a cohesive data science workflow.
+    \item Use RStudio’s auto-complete features to explore function arguments and documentation.
+\end{itemize}

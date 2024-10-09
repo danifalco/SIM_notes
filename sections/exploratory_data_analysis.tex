@@ -1,0 +1,63 @@
+\section{Exploratory Data Analysis}
+
+Exploratory Data Analysis (EDA) is a crucial step in understanding and summarizing the main characteristics of a dataset. It involves the use of various statistical tools and visualization techniques to identify patterns, detect outliers, and gain insights before conducting formal modeling or hypothesis testing.
+
+\subsection{Numerical Summaries}
+\textbf{Numerical summaries} provide quantitative insights into the dataset using measures of central tendency and variability. Key statistics include:
+
+\begin{itemize}
+    \item \textbf{Mean} (\(\mu\)): The average of all observations in a dataset.
+    \item \textbf{Median} (\(Q_2\)): The middle value of the ordered dataset, less sensitive to outliers.
+    \item \textbf{Mode}: The most frequently occurring value(s) in the dataset.
+    \item \textbf{Variance} (\(\sigma^2\)): Measure of how far observations spread out from the mean.
+    \item \textbf{Standard Deviation} (\(\sigma\)): The square root of the variance.
+    \item \textbf{Interquartile Range} (IQR): Difference between the 75th percentile (\(Q_3\)) and 25th percentile (\(Q_1\)).
+\end{itemize}
+
+\subsection{Graphical Summaries}
+Graphical representations help to visualize the distribution and relationships between variables. Common plots include:
+
+\begin{itemize}
+    \item \textbf{Histograms}: Show the frequency distribution of a continuous variable.
+    \item \textbf{Box Plots}: Display the spread of the data along with outliers.
+    \item \textbf{Scatter Plots}: Used to visualize the relationship between two continuous variables.
+    \item \textbf{Bar Charts}: Represent categorical data using bars of different heights.
+\end{itemize}
+
+\subsection{Useful R Functions for EDA}
+\begin{itemize}
+    \item \texttt{summary()} --- Provides a numerical summary of a dataset.
+    \item \texttt{boxplot()} --- Plots a box-and-whisker plot.
+    \item \texttt{hist()} --- Creates a histogram for a given variable.
+    \item \texttt{plot()} --- Generic plotting function, often used for scatter plots.
+\end{itemize}
+
+\subsection{Example R Code for EDA}
+Below is an example of performing basic EDA on a sample dataset in R:
+
+\begin{lstlisting}[language=R, caption=Basic EDA in R]
+# Load necessary library
+library(ggplot2)
+
+# Example dataset: mtcars
+data("mtcars")
+
+# Numerical summary
+summary(mtcars)
+
+# Histogram of Miles per Gallon (mpg)
+hist(mtcars$mpg, main="Histogram of MPG", xlab="Miles Per Gallon", col="lightblue", breaks=10)
+
+# Boxplot for distribution of mpg by number of cylinders
+boxplot(mpg ~ cyl, data=mtcars, main="Boxplot of MPG by Cylinder", xlab="Number of Cylinders", ylab="Miles Per Gallon", col="orange")
+
+# Scatter plot of Horsepower vs MPG
+plot(mtcars$hp, mtcars$mpg, main="Scatter Plot of Horsepower vs MPG", xlab="Horsepower", ylab="Miles Per Gallon", col="blue", pch=19)
+\end{lstlisting}
+
+\subsection{Key Points}
+\begin{itemize}
+    \item EDA helps to identify anomalies and understand the structure of the data.
+    \item Both numerical and graphical summaries are essential in the preliminary stages of data analysis.
+    \item Visualizations are often more intuitive and revealing compared to raw statistical measures.
+\end{itemize}

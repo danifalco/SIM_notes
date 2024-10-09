@@ -1,0 +1,106 @@
+\section{Confidence Intervals}
+
+Confidence intervals provide a range of plausible values for an unknown population parameter based on sample data. They are used to quantify the uncertainty around a point estimate and are typically expressed as a percentage (e.g., 95\% confidence interval).
+
+\subsection{Key Concepts in Confidence Intervals}
+\begin{itemize}
+    \item \textbf{Point Estimate}: A single value estimate of a population parameter (e.g., sample mean).
+    \item \textbf{Confidence Level}: The proportion of times the interval would contain the true parameter if we were to repeat the sampling process many times (e.g., 95\%).
+    \item \textbf{Margin of Error}: The maximum expected difference between the point estimate and the true population parameter. Influenced by sample size and variability.
+    \item \textbf{Confidence Interval Formula}: 
+        \[
+        \text{CI} = \text{Point Estimate} \pm \text{Critical Value} \times \text{Standard Error}
+        \]
+\end{itemize}
+
+\subsection{Confidence Interval for the Mean (Known Variance)}
+When the population variance \(\sigma^2\) is known, the confidence interval for the mean \(\mu\) is calculated as:
+
+\[
+\text{CI} = \bar{x} \pm z_{\alpha/2} \times \frac{\sigma}{\sqrt{n}}
+\]
+
+Where:
+\begin{itemize}
+    \item \(\bar{x}\) --- Sample mean.
+    \item \(z_{\alpha/2}\) --- Critical value from the standard normal distribution for the given confidence level.
+    \item \(\sigma\) --- Population standard deviation.
+    \item \(n\) --- Sample size.
+\end{itemize}
+
+\subsection{Confidence Interval for the Mean (Unknown Variance)}
+When the population variance is unknown, use the sample standard deviation \(s\) and the t-distribution:
+
+\[
+\text{CI} = \bar{x} \pm t_{\alpha/2, n-1} \times \frac{s}{\sqrt{n}}
+\]
+
+Where \(t_{\alpha/2, n-1}\) is the critical value from the t-distribution with \(n-1\) degrees of freedom.
+
+\subsection{Confidence Interval for Proportions}
+For categorical data, the confidence interval for a proportion \(p\) is calculated using:
+
+\[
+\text{CI} = \hat{p} \pm z_{\alpha/2} \times \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}
+\]
+
+Where:
+\begin{itemize}
+    \item \(\hat{p}\) --- Sample proportion.
+    \item \(n\) --- Sample size.
+    \item \(z_{\alpha/2}\) --- Critical value from the standard normal distribution.
+\end{itemize}
+
+\subsection{Useful R Functions for Confidence Intervals}
+\begin{itemize}
+    \item \texttt{t.test()} --- Provides confidence intervals for one-sample, two-sample, and paired t-tests.
+    \item \texttt{prop.test()} --- Computes confidence intervals for proportions.
+    \item \texttt{confint()} --- Calculates confidence intervals for model parameters.
+\end{itemize}
+
+\subsection{Example R Code for Confidence Intervals}
+Here’s how to compute various types of confidence intervals in R:
+
+\begin{lstlisting}[language=R, caption=Confidence Interval Calculations in R]
+# One-sample t-test for confidence interval
+x <- c(12.9, 14.2, 13.7, 15.3, 14.8, 13.6, 14.0)
+t.test(x) # 95% CI for the mean
+
+# Confidence interval for a proportion
+prop.test(x = 34, n = 230, conf.level = 0.95) # 95% CI for proportion
+
+# Confidence interval for a difference in means
+group1 <- c(15, 17, 16, 14, 18)
+group2 <- c(12, 14, 13, 15, 11)
+t.test(group1, group2) # 95% CI for the difference in means
+
+# Confidence intervals for regression coefficients
+model <- lm(mpg ~ hp + wt, data = mtcars)
+confint(model, level = 0.95) # 95% CI for model coefficients
+\end{lstlisting}
+
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\subsection{Choosing the Appropriate Confidence Interval}
+\begin{tabularx}{\textwidth}{|l|Y|X|X|}
+\hline
+\textbf{Scenario} & \textbf{Parameter of Interest} & \textbf{Distribution} & \textbf{R Function} \\
+\hline
+Population mean with known variance & \(\mu\) & Normal distribution & Manual calculation or \texttt{qnorm()} \\
+\hline
+Population mean with unknown variance & \(\mu\) & t-distribution & \texttt{t.test()} \\
+\hline
+Population proportion & \(p\) & Binomial distribution & \texttt{prop.test()} \\
+\hline
+Difference in two population means & \(\mu_1 - \mu_2\) & t-distribution & \texttt{t.test()} \\
+\hline
+Regression coefficients & \(\beta\) & Normal approximation & \texttt{confint()} \\
+\hline
+\end{tabularx}
+
+\subsection{Key Points}
+\begin{itemize}
+    \item Higher confidence levels (e.g., 99\%) produce wider intervals compared to lower confidence levels (e.g., 90\%).
+    \item Confidence intervals are not probabilities; they describe the range of plausible values for the population parameter.
+    \item If a confidence interval for a mean difference contains zero, it suggests no significant difference.
+\end{itemize}

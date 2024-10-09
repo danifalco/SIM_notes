@@ -1,0 +1,74 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{tabularx}
+
+% Code Styling
+
+\definecolor{codebg}{rgb}{0.95,0.95,0.95}
+
+% Customize the listings package for a Cobalt theme
+\lstset{
+  backgroundcolor=\color{codebg},              % Set the background color for the listings
+  frame=single,
+  basicstyle=\ttfamily,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{red},
+  showstringspaces=false,
+  breaklines=true,                           % Enable line breaks
+  numbers=left,                              % Line numbers on the left
+  numberstyle=\small,
+  numbersep=8pt,                             % Space between line numbers and code
+  captionpos=b,                              % Caption position at the bottom
+}
+
+
+% Section formatting
+\titleformat{\section}{\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+
+% Document Information
+\title{Statistical Inference and Modelling Summary}
+\author{Daniel Weronski Falc\'o}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+% Introduction Section
+\input{sections/introduction}
+
+% Additional Sections
+\newpage
+\input{sections/exploratory_data_analysis}
+
+\newpage
+\input{sections/hypothesis_testing}
+
+\newpage
+\input{sections/confidence_intervals}
+
+\newpage
+\input{sections/distributions}
+
+\newpage
+\input{sections/regression_and_modelling}
+
+\newpage
+\input{sections/advanced_topics}
+
+\newpage
+\input{sections/useful_r_functions}
+
+
+\end{document}

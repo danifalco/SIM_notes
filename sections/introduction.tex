@@ -1,0 +1,30 @@
+\section{Introduction}
+
+This cheat sheet provides a concise summary of key concepts in statistical inference and modeling. It is structured to help navigate through definitions, usages, and code snippets for statistical tools commonly used in data science.
+
+\subsection{Classical vs Fisherian Inference}
+Statistical inference is broadly classified into two paradigms:
+\begin{itemize}
+    \item \textbf{Classical Inference (Frequentist Approach)}: Focuses on the long-run frequency of events. Relies heavily on hypothesis testing, confidence intervals, and p-values.
+    \item \textbf{Fisherian Inference}: An approach that uses likelihood to measure support for different hypotheses. Unlike the classical approach, Fisher’s inference does not require specification of alternative hypotheses.
+\end{itemize}
+
+\subsection{Key Concepts in Inference}
+Statistical inference involves making decisions or drawing conclusions about a population based on a sample. The two primary goals are:
+\begin{enumerate}
+    \item \textbf{Estimation}: Determining the approximate value of a population parameter.
+    \item \textbf{Hypothesis Testing}: Assessing evidence provided by the data against a specified hypothesis.
+\end{enumerate}
+
+\subsection{When to Use Different Methods}
+\begin{itemize}
+    \item \textbf{Parametric Tests} (e.g., t-tests, ANOVA): Assume underlying distribution of the data.
+    \item \textbf{Non-Parametric Tests} (e.g., Mann-Whitney U test, Kruskal-Wallis test): Do not assume any specific distribution.
+\end{itemize}
+
+\subsection{Useful R Functions for Inference}
+\begin{itemize}
+    \item \texttt{t.test()} --- Performs one and two-sample t-tests.
+    \item \texttt{chisq.test()} --- Performs Chi-squared test for independence.
+    \item \texttt{prop.test()} --- Tests for the equality of proportions.
+\end{itemize}
